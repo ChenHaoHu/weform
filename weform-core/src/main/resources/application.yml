@@ -1,0 +1,108 @@
+wxapp:
+  appid: wx4f4a31c69f79cd6e
+  appsecret: a5cc69b21bfe0ce57d21f82658effdd4
+
+
+OSS:
+  endpoint: http://oss-cn-beijing.aliyuncs.com
+  accessKeyId: LTAI5y6NsFd6eFCI
+  accessKeySecret: PCB1hr1gstL1HGo8r3kzq99qOwk7fc
+  bucketName: weform
+  bucketUrl: https://weform.oss-cn-beijing.aliyuncs.com/
+
+
+base:
+  dataCenterId: 01
+  machineId: 01
+  TIME_TASK_REDIS_ZSET: TimeTask
+
+spring:
+  datasource:
+    mysqlwrite:
+      username: weform
+      password: jTeGac65Xs7pJz8A
+      driver-class: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://120.78.174.107:3306/weform?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false
+    mysqlread:
+      username: weform
+      password: KDxcZaJKCHw3YpJR
+      driver-class: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://47.100.38.224:3306/weform?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false
+
+
+  dubbo:
+    application:            #应用配置，用于配置当前应用信息，不管该应用是提供者还是消费者。
+      name: comsumer
+    registry:                 #注册中心配置，用于配置连接注册中心相关信息。
+      address: zookeeper://120.78.174.107:2181
+
+  servlet:
+    multipart:
+      max-file-size: 20MB
+
+
+  redis:
+    host: 120.78.174.107
+    database: 0
+    password: hcy
+    port: 6379
+    jedis:
+      pool:
+        max-active: 20
+        max-wait: 10000
+        max-idle: 20
+    timeout: 10000
+
+  rabbitmq:
+    host: 120.78.174.107
+    username: hcy
+    password: hcy
+    virtual-host: /weform
+    port: 5672
+    publisher-returns: true
+    publisher-confirms: true
+    listener:
+      simple:
+        acknowledge-mode: manual
+        max-concurrency: 10
+        concurrency: 10
+        retry:
+          enabled: true
+  mail:
+    host: smtp.qq.com
+    username: 775656764@qq.com
+    password: vnqfxqrmnupcbbhj
+    properties:
+      mail.smtp.socketFactory.fallback: true
+      mail.smtp.starttls.enable: true
+      mail.smtp.auth: true
+
+
+  main:
+    allow-bean-definition-overriding: true
+
+
+  data:
+    elasticsearch:
+      cluster-nodes: 127.0.0.1:9300 # 配置IP及端口号
+      cluster-name: elasticsearch
+#  port: 443
+#  ssl:
+#    key-store: classpath:214576818110011.pfx
+#    key-store-password: 214576818110011
+#    key-store-type: PKCS12
+
+logging:
+  level:
+    com.weform.mapper : debug
+    com.weform.service: debug
+    RabbitMqConfig: debug
+    filter: debug
+
+server:
+  tomcat:
+    basedir: /temp/weform/tomcat
+
+
+
+

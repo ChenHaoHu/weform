@@ -1,0 +1,41 @@
+spring:
+  datasource:
+    username: weform
+    password: jTeGac65Xs7pJz8A
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://120.78.174.107:3306/weform?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false
+
+  rabbitmq:
+    host: 120.78.174.107
+    username: hcy
+    password: hcy
+    virtual-host: /weform
+    port: 5672
+    publisher-returns: true
+    publisher-confirms: true
+    listener:
+      simple:
+        acknowledge-mode: manual
+        max-concurrency: 10
+        concurrency: 10
+        retry:
+          enabled: true
+  mail:
+    host: smtp.qq.com
+    username: 775656764@qq.com
+    password: vnqfxqrmnupcbbhj
+    properties:
+      mail.smtp.socketFactory.fallback: true
+      mail.smtp.starttls.enable: true
+      mail.smtp.auth: true
+  message:
+    appid: 1400165745
+    appkey: 41e802105b040285138cbc0216f25ea1
+    smsSign: 汇表单小程序
+    verTemp: 338431
+    ActvityBeginTemp: 339714
+    ActvitySignEndTemp: 339713
+
+
+server:
+  port: 8091

@@ -1,0 +1,9 @@
+spring:
+  data:
+    elasticsearch:
+      cluster-nodes: 127.0.0.1:9300 # 配置IP及端口号
+      cluster-name: elasticsearch
+
+
+server:
+  port: 8087
