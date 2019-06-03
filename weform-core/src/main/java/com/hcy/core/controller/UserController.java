@@ -35,10 +35,8 @@ public class UserController {
 
         //插入用户
         Integer userid = userService.addUser(name, code, gender, avatar, province, city, country);
-        //获取token
-        String token = "ssas";
 
-        return  new ResponseEntity(RespCode.SUCCESS,token);
+        return  new ResponseEntity(RespCode.SUCCESS,userid);
     }
 
 }

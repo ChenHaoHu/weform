@@ -4,8 +4,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.hcy.core.mapper.FormMapper;
 import com.hcy.core.mapper.JoinMapper;
 import com.hcy.core.model.JoinDO;
+import com.hcy.core.service.CommonUtil;
 import com.hcy.core.service.ExcelUtil;
 import com.hcy.core.service.TimeUtil;
+import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
@@ -17,10 +19,11 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.FileOutputStream;
+import java.io.*;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 /**
@@ -33,11 +36,7 @@ import java.util.Set;
 public class ExcelUtilImpl implements ExcelUtil {
 
 
-    String pathname = "";
 
-
-
-    String home = "";
 
     @Autowired
     FormMapper formMapper;
@@ -47,6 +46,10 @@ public class ExcelUtilImpl implements ExcelUtil {
 
     @Autowired
     TimeUtil timeUtil;
+
+    @Autowired
+    CommonUtil commonUtil;
+
 
     XSSFWorkbook workBook;
     XSSFSheet sheet;
@@ -72,9 +75,7 @@ public class ExcelUtilImpl implements ExcelUtil {
     @Override
     public String export(String formId) {
 
-
-
-
+        FileOutputStream outStream = null;
         String back = "";
         try
         {
@@ -109,7 +110,7 @@ public class ExcelUtilImpl implements ExcelUtil {
             for (int i = 0; i < array.length; i++) {
                 String title = array[i].toString();
                 Cell cell = row.createCell(i);
-                 cell.setCellValue(title);
+                cell.setCellValue(title);
                 cell.setCellStyle(cellStyle);
                 sheet.setColumnWidth(i, (title.length()+2) * 512);
             }
@@ -133,29 +134,32 @@ public class ExcelUtilImpl implements ExcelUtil {
 
             }
 
-            File path = new File(pathname);
 
-            if(!path.exists()){
-                path.setWritable(true, false);
-                path.mkdirs();
-                System.out.println("创建文件");
-            }
+            //随机吧
+            File  file = new File(fileName);
 
-            File  file = new File(pathname+File.separator+fileName);
-
-            back = home  + "excel/"+fileName;
             //文件输出流
-            FileOutputStream outStream = new FileOutputStream(file);
-            System.out.println(file.getPath());
+            outStream = new FileOutputStream(file);
             workBook.write(outStream);
             outStream.flush();
-            outStream.close();
+
+            back = commonUtil.uploadFile(file.getName(), new FileInputStream(file));
+
+
+
         }
         catch (Exception e)
         {
             e.printStackTrace();
+        }finally {
+            if (outStream != null){
+                try {
+                    outStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
-
 
         return back;
     }

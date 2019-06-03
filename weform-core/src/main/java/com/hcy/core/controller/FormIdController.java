@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 
 @RestController
-@RequestMapping("/api")
+//@RequestMapping("/api")
 public class FormIdController {
 
     @Autowired

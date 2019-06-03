@@ -11,6 +11,7 @@ import com.hcy.core.service.FormService;
 import com.hcy.core.service.MathUtil;
 import com.hcy.core.service.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -46,14 +47,14 @@ public class FormServiceImpl implements FormService {
     public String addForm(RequestForm data) {
 
         FormDO form = new FormDO(data.getUserid(),data.getTitle(),data.getType(),
-               data.getMode(),data.getStart(),data.getEnd(),timeUtil.getNowTime(),
+                data.getMode(),data.getStart(),data.getEnd(),timeUtil.getNowTime(),
                 data.getMaxnum(),data.getIntro(),data.getIconurl(), data.getPosterurl(),
                 data.getIspublic(),data.getUsername(),data.getTags());
 
         formMapper.insertform(form);
-       String password =  mathUtil.getFormPassWord(form.getFormid());
+        String password =  mathUtil.getFormPassWord(form.getFormid());
 
-       formMapper.addpassword(form.getFormid(),password);
+        formMapper.addpassword(form.getFormid(),password);
 
         JSONObject jsonObject  = new JSONObject();
         jsonObject.put("formid",form.getFormid());
@@ -69,20 +70,18 @@ public class FormServiceImpl implements FormService {
      */
     @Override
     public FormDO getFormByPassword(String password) {
-           FormDO form  = formMapper.getFromByPassword(password);
+        FormDO form  = formMapper.getFromByPassword(password);
         return form;
     }
 
     @Override
     public String getFormTitle(Integer formid) {
-
         String titleByFormid = formMapper.getTitleByFormid(formid + "");
         return titleByFormid;
     }
 
     @Override
     public List getFormByTag(String tag) {
-
         List<FormDO> formByTag = formMapper.getFormByTag(tag);
         List<Map> back = new ArrayList<>();
         for (int i = 0; i < formByTag.size(); i++) {

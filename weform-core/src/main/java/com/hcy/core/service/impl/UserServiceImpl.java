@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserService {
             UserDO user =  new UserDO(openid,name,avatar,gender,province,city,country);
             user.setTime(timeUtil.getNowTime());
             userMapper.insertUser(user);
-            return user.getuserid();
+            return user.getUserid();
         }else{
             return useidByOpenid;
         }

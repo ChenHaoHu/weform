@@ -7,8 +7,10 @@ import com.hcy.core.common.response.ResponseEntity;
 import com.hcy.core.model.FormDO;
 import com.hcy.core.service.FormService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,18 +25,18 @@ import java.util.Map;
  */
 
 @RestController
-@RequestMapping("/api/form")
+@RequestMapping("/form")
 public class FormController {
     @Autowired
     FormService formService;
 
 
     @RequestMapping(value="/add",method= RequestMethod.GET)
-    public ResponseEntity getUser(RequestForm data, HttpServletRequest httpServletRequest) {
+    public ResponseEntity getUser(RequestForm data) {
 
-        Integer userid = Integer.valueOf((String)httpServletRequest.getAttribute("userid"));
+        Integer userid = data.getUserid();
 
-        System.out.println(userid);
+
         data.setUserid(userid);
 
        String str =  formService.addForm(data);
@@ -44,6 +46,7 @@ public class FormController {
 
 
     @RequestMapping(value="/find/password",method= RequestMethod.GET)
+    @Cacheable("forms")
     public ResponseEntity getFormByPassword(String password) {
 
         password = password.toUpperCase();
@@ -54,10 +57,9 @@ public class FormController {
 
 
     @RequestMapping(value="/title",method= RequestMethod.GET)
+    @Cacheable("forms")
     public ResponseEntity getTitleByFormid(Integer formid) {
-
         String formTitle = formService.getFormTitle(formid);
-
         return  new ResponseEntity(RespCode.SUCCESS,formTitle);
     }
 
@@ -83,8 +85,8 @@ public class FormController {
 
 
     @RequestMapping(value="/user/build",method= RequestMethod.GET)
-    public ResponseEntity getFormByUserid(HttpServletRequest httpServletRequest) {
-        Integer userid = Integer.valueOf((String)httpServletRequest.getAttribute("userid"));
+    public ResponseEntity getFormByUserid(@RequestParam("userid")int userid) {
+
         List formByUserid =  formService.getFormByUserid(userid);
         return  new ResponseEntity(RespCode.SUCCESS,formByUserid);
     }

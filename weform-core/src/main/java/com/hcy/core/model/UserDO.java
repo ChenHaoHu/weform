@@ -1,11 +1,17 @@
 package com.hcy.core.model;
 
+import lombok.Data;
+
+import java.io.Serializable;
+
 /**
  * @Auther: 简单DI年华
  * @Date: 18-9-26 21:23
  * @Description: 用户信息的实体类
  */
+@Data
 public class UserDO {
+
 
     //用户id
     private Integer userid;
@@ -78,149 +84,6 @@ public class UserDO {
         this.grade = grade;
     }
 
-    public Integer getuserid() {
-        return userid;
-    }
-
-    public void setuserid(Integer userid) {
-        this.userid = userid;
-    }
-
-    public String getOpenid() {
-        return openid;
-    }
-
-    public void setOpenid(String openid) {
-        this.openid = openid;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getProvince() {
-        return province;
-    }
-
-    public void setProvince(String province) {
-        this.province = province;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getIdentifytype() {
-        return identifytype;
-    }
-
-    public void setIdentifytype(String identifytype) {
-        this.identifytype = identifytype;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public String getCollection() {
-        return collection;
-    }
-
-    public void setCollection(String collection) {
-        this.collection = collection;
-    }
-
-    public String getJoin() {
-        return join;
-    }
-
-    public void setJoin(String join) {
-        this.join = join;
-    }
-
-    public String getBuild() {
-        return build;
-    }
-
-    public void setBuild(String build) {
-        this.build = build;
-    }
-
-    public String getShare() {
-        return share;
-    }
-
-    public void setShare(String share) {
-        this.share = share;
-    }
-
-    public Integer getSigndaynum() {
-        return signdaynum;
-    }
-
-    public void setSigndaynum(Integer signdaynum) {
-        this.signdaynum = signdaynum;
-    }
-
-    public String getGrade() {
-        return grade;
-    }
-
-    public void setGrade(String grade) {
-        this.grade = grade;
-    }
 
 }
 

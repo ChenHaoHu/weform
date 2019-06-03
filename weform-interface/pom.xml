@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.hcy</groupId>
-    <artifactId>ServerInterface</artifactId>
+    <artifactId>weform-interface</artifactId>
     <version>1.0-SNAPSHOT</version>
 
 

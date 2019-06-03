@@ -22,8 +22,8 @@ import java.util.Set;
  * @Version: 1.0
  **/
 
-@Configuration//配置类
-@EnableScheduling//支持定时任务类
+//@Configuration//配置类
+//@EnableScheduling//支持定时任务类
 public class Timer {
 
     @Autowired

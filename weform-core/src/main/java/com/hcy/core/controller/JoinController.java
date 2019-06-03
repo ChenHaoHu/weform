@@ -20,7 +20,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("/api/join")
+@RequestMapping("/join")
 public class JoinController {
 
     @Autowired
@@ -28,11 +28,10 @@ public class JoinController {
 
 
     @RequestMapping(value="/form",method= RequestMethod.GET)
-    public ResponseEntity joinForm(@RequestParam("formid")String formid,
-                                  @RequestParam("content")String content,
-                                   HttpServletRequest httpServletRequest
-                                 ) {
-        String userid =(String)httpServletRequest.getAttribute("userid");
+    public ResponseEntity joinForm(@RequestParam("userid")String userid,
+                                   @RequestParam("formid")String formid,
+                                   @RequestParam("content")String content ) {
+
         Integer back =  joinService.joinForm(formid,userid,content);
         return  new ResponseEntity(RespCode.SUCCESS,back);
     }
@@ -70,8 +69,8 @@ public class JoinController {
 
 
     @RequestMapping(value="/user/sign",method= RequestMethod.GET)
-    public ResponseEntity getJoinByUserid( HttpServletRequest httpServletRequest) {
-        Integer userid = Integer.valueOf((String)httpServletRequest.getAttribute("userid"));
+    public ResponseEntity getJoinByUserid(@RequestParam("userid")int userid) {
+
 
         List list = joinService.getJoinlistByUserid(userid);
         return  new ResponseEntity(RespCode.SUCCESS,list);

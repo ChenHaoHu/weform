@@ -1,11 +1,15 @@
 package com.hcy.core.model;
+
+import java.io.Serializable;
+
 /**
  * @Auther: 简单DI年华
  * @Date: 18-9-26 20:26
  * @Description: 表单的实体类
  *                  记录表单的一些详细信息
  */
-public class FormDO {
+public class FormDO implements Serializable {
+    private static final long serialVersionUID = 4283477093438604895L;
     //表单id
     private Integer formid;
     //创建者id

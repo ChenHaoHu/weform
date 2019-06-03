@@ -45,8 +45,10 @@ public class CommonControler {
     @PostMapping(value = "/upload")
     public ResponseEntity uploadFile(@RequestParam("file") MultipartFile file){
         String url = null;
+        System.out.println("---------------");
         try {
              url = commonUtil.uploadFile(file.getOriginalFilename(), file.getInputStream());
+            System.out.println(url);
         }catch (Exception e){
             return new ResponseEntity(RespCode.ERROR,null);
         }

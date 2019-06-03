@@ -1,6 +1,9 @@
 package com.hcy.core.common.response;
 
-public class ResponseEntity {
+import java.io.Serializable;
+
+public class ResponseEntity  implements Serializable {
+    private static final long serialVersionUID = -5980160995687871429L;
     private int code;
     private String msg;
     private Object data;

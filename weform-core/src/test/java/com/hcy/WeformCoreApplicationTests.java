@@ -1,6 +1,5 @@
 package com.hcy;
 
-import com.hcy.search.service.FormSearchService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +14,10 @@ import java.util.Set;
 public class WeformCoreApplicationTests {
 
 
-    @Autowired
-    FormSearchService formSearchService;
 
     @Test
     public void contextLoads() {
 
-        System.out.println(formSearchService);
 
 
     }

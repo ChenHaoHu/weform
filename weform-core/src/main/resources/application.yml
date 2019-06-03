@@ -17,6 +17,9 @@ base:
   TIME_TASK_REDIS_ZSET: TimeTask
 
 spring:
+  cache:
+    type: redis
+
   datasource:
     mysqlwrite:
       username: weform
@@ -53,6 +56,7 @@ spring:
         max-idle: 20
     timeout: 10000
 
+
   rabbitmq:
     host: 120.78.174.107
     username: hcy
@@ -81,11 +85,13 @@ spring:
   main:
     allow-bean-definition-overriding: true
 
-
   data:
     elasticsearch:
       cluster-nodes: 127.0.0.1:9300 # 配置IP及端口号
       cluster-name: elasticsearch
+    repositories:
+      enabled: true
+
 #  port: 443
 #  ssl:
 #    key-store: classpath:214576818110011.pfx
@@ -102,6 +108,9 @@ logging:
 server:
   tomcat:
     basedir: /temp/weform/tomcat
+
+
+  port: 8083
 
 
 
